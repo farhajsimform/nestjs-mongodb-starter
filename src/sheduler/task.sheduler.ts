@@ -7,6 +7,7 @@ export class TasksService {
 
   @Cron('* * * * *')
   handleCron() {
-    this.logger.debug('Called when the current second is 45');
+    this.logger.debug('Called every minute');
+    // We can handle here a scheduled function
   }
 }

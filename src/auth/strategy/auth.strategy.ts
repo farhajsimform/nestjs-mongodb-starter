@@ -19,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
   async validate(payload: { sub: string; email: string }) {
-    const user = await this.userModel.findById(payload.sub);
+    const user = await this.userModel.findById(payload.sub).lean();
     delete user.password;
     return user;
   }

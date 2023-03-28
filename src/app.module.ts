@@ -7,7 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { User, UserSchema } from './mongoose/schema/user.schema';
 import { UserModule } from './user/user.module';
 import { ScheduleModule } from '@nestjs/schedule';
-import { TasksService } from 'src/sheduler/task.service';
+import { TaskSchedulerModule } from './sheduler/task.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -31,8 +32,10 @@ import { TasksService } from 'src/sheduler/task.service';
     AuthModule,
     UserModule,
     ScheduleModule.forRoot(),
+    TaskSchedulerModule,
+    EventsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, TasksService],
+  providers: [AppService],
 })
 export class AppModule {}

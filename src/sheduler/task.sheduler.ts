@@ -1,13 +1,15 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
+import { FileService } from 'src/file/file.service';
 
 @Injectable()
 export class TasksService {
+  constructor(private file: FileService) {}
   private readonly logger = new Logger(TasksService.name);
 
-  @Cron('* * * * *')
+  @Cron('@daily')
   handleCron() {
-    this.logger.debug('Called every minute');
-    // We can handle here a scheduled function
+    this.logger.debug('Called daily');
+    this.file.saveFile();
   }
 }

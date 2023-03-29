@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TaskSchedulerModule } from './sheduler/task.module';
 import { EventsModule } from './events/events.module';
+import { FilesModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { EventsModule } from './events/events.module';
     ScheduleModule.forRoot(),
     TaskSchedulerModule,
     EventsModule,
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

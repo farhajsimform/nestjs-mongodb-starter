@@ -61,4 +61,11 @@ export class AuthService {
       access_token: token,
     };
   }
+
+  async verifyToken(token: string) {
+    const decoded = await this.jwt.verifyAsync(token, {
+      secret: this.config.get('JWT_SECRET'),
+    });
+    return decoded;
+  }
 }

@@ -1,5 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import {
+  ConnectedSocket,
   MessageBody,
   SubscribeMessage,
   WebSocketGateway,
@@ -20,8 +21,11 @@ export class EventsGateway {
 
   @UseGuards(WsGuard)
   @SubscribeMessage('chat')
-  async identity(@MessageBody() data: any): Promise<any> {
-    console.log(data);
+  async chat(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: any,
+  ): Promise<any> {
+    client.emit('chat', 'test');
     return data;
   }
 

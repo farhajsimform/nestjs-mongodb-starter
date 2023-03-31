@@ -8,24 +8,32 @@ import {
   WsResponse,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import { EventsService } from './events.service';
 import { WsGuard } from './gaurd/events.gaurd';
 
+interface ISocket extends Socket {
+  user: any;
+}
 @WebSocketGateway({
   cors: {
     origin: '*',
   },
 })
 export class EventsGateway {
+  constructor(private eventsService: EventsService) {}
   @WebSocketServer()
   server: Server;
 
   @UseGuards(WsGuard)
-  @SubscribeMessage('chat')
+  @SubscribeMessage('SEND_MESSAGE')
   async chat(
-    @ConnectedSocket() client: Socket,
-    @MessageBody() data: any,
+    @ConnectedSocket() client: ISocket,
+    @MessageBody() message: any,
   ): Promise<any> {
-    client.emit('chat', 'test');
+    const data = await this.eventsService.handleUsersChat(client.user, {
+      message,
+    });
+    client.emit('RECIVED_MESSAGE', data);
     return data;
   }
 

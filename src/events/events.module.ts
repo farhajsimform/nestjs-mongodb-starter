@@ -5,6 +5,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { Chat, ChatSchema } from 'src/mongoose/schema/chat.schema';
 import { User, UserSchema } from 'src/mongoose/schema/user.schema';
 import { EventsGateway } from './events.gateway';
+import { EventsService } from './events.service';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { EventsGateway } from './events.gateway';
       { name: User.name, schema: UserSchema },
     ]),
   ],
-  providers: [EventsGateway, AuthService, JwtService],
+  providers: [EventsGateway, AuthService, JwtService, EventsService],
 })
 export class EventsModule {}

@@ -10,6 +10,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { TaskSchedulerModule } from './sheduler/task.module';
 import { EventsModule } from './events/events.module';
 import { FilesModule } from './file/file.module';
+import { NestCloudinaryClientModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { FilesModule } from './file/file.module';
     TaskSchedulerModule,
     EventsModule,
     FilesModule,
+    NestCloudinaryClientModule,
   ],
   controllers: [AppController],
   providers: [AppService],

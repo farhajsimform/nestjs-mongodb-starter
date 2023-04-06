@@ -13,3 +13,7 @@ export class EditUserDto {
   @IsOptional()
   lastName?: string;
 }
+
+export class ProfilePicDto {
+  name: string;
+}

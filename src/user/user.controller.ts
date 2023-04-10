@@ -24,7 +24,7 @@ export class UserController {
   }
 
   @Patch('edit')
-  editUser(@GetUser('id') userId: string, @Body() dto: EditUserDto) {
+  editUser(@GetUser('_id') userId: string, @Body() dto: EditUserDto) {
     return this.userService.editUser(userId, dto);
   }
 
@@ -32,7 +32,7 @@ export class UserController {
   @Post('file')
   uploadFile(
     @UploadedFile() file: Express.Multer.File,
-    @GetUser('id') userId: string,
+    @GetUser('_id') userId: string,
   ) {
     return this.userService.uploadUserProfilePic(userId, file);
   }

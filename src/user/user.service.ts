@@ -22,6 +22,15 @@ export class UserService {
   }
 
   async uploadUserProfilePic(userId: string, file: Express.Multer.File) {
-    return this.cloudinaryService.uploadFile(file);
+    try {
+      const response = await this.cloudinaryService.uploadFile(file);
+      await this.userModel.updateOne(
+        { _id: userId },
+        { profilepic: response.url },
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 }

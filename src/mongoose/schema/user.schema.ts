@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
+import { Post } from './post.schema';
 
 export enum Role {
   ADMIN = 'admin',
@@ -32,6 +33,9 @@ export class User extends Document {
 
   @Prop()
   lastName: string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Post' })
+  posts: Post;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

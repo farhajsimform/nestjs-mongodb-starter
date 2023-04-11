@@ -11,6 +11,7 @@ import { TaskSchedulerModule } from './sheduler/task.module';
 import { EventsModule } from './events/events.module';
 import { FilesModule } from './file/file.module';
 import { NestCloudinaryClientModule } from './cloudinary/cloudinary.module';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { NestCloudinaryClientModule } from './cloudinary/cloudinary.module';
     EventsModule,
     FilesModule,
     NestCloudinaryClientModule,
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],

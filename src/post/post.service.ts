@@ -15,7 +15,19 @@ export class PostService {
   ) {}
 
   async create(userId: string, data: PostDto) {
-    console.log(userId, data);
+    const createdPost = await this.postModel.create({
+      content: data.content,
+      postedby: userId,
+    });
+    await this.userModel.updateOne(
+      { _id: userId },
+      {
+        $push: {
+          posts: createdPost._id,
+        },
+      },
+    );
+    return this.findById(createdPost._id);
   }
   async findAll() {
     const allPosts = await this.postModel
